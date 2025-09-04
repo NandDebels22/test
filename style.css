@@ -4,6 +4,10 @@
     -webkit-user-select: none;
     -moz-user-select: none;
 }
+body, canvas {
+  touch-action: manipulation; /* voorkomt dubbel-tap zoom */
+}
+
 body {
     background-color: rgba(0,0,0, .95);
     height: 100vh;
