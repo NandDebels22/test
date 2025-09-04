@@ -745,6 +745,7 @@ document.body.addEventListener('keydown', (e) => {
 // Op gsm 
 
 cvs.addEventListener('touchstart', () => {
+    e.preventDefault();
     //if ready screen >> go to play state
     if (gameState.current == gameState.getReady) {
         gameState.current = gameState.play
