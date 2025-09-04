@@ -741,3 +741,25 @@ document.body.addEventListener('keydown', (e) => {
         }
     }
 })
+
+// Op gsm 
+
+cvs.addEventListener('touchstart', () => {
+    //if ready screen >> go to play state
+    if (gameState.current == gameState.getReady) {
+        gameState.current = gameState.play
+    }
+    //if play state >> bird keeps flying
+    if (gameState.current == gameState.play) {
+        bird.flap()
+        SFX_FLAP.play()
+        description.style.visibility = "hidden"
+    }
+    //if game over screen >> go to ready screen
+    if (gameState.current == gameState.gameOver) {
+        pipes.reset()
+        score.reset()
+        gameState.current = gameState.getReady
+        SFX_SWOOSH.play()
+    }
+})
