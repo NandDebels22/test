@@ -54,8 +54,8 @@ bg = {
     //object's key-value properties pinpointing its location
     imgX: 0,
     imgY: 0,
-    width: 276,
-    height: 228,
+    width: 270,
+    height: 220,
     //x,y coordinates of where image should be drawn on canvas
     x: 0,
     //https://stackoverflow.com/questions/7043509/this-inside-object
@@ -209,7 +209,7 @@ ground = {
     //object's key-value properties pinpointing its location
     imgX: 276,
     imgY: 0,
-    width: 224,
+    width: 210,
     height: 112,
     //values for drawing on canvas
     x: 0,
@@ -348,9 +348,9 @@ score = {
 bird = {
     animation: [
         {imgX: 276, imgY: 114},  //  position 0
-        {imgX: 276, imgY: 140},  //  position 1
-        {imgX: 276, imgY: 166},  //  position 2
-        {imgX: 276, imgY: 140}   //  position 1
+        {imgX: 276, imgY: 114},  //  position 1
+        {imgX: 276, imgY: 114},  //  position 2
+        {imgX: 276, imgY: 114}   //  position 1
     ],
     fr: 0,
     //object's key-value properties pinpointing its location
