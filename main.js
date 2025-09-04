@@ -699,9 +699,9 @@ setInterval(loop, 17)
 /*************************
 ***** EVENT HANDLERS ***** 
 *************************/
+//on mouse click // tap screen
 
- 
-
+//on spacebar
 document.body.addEventListener('keydown', (e) => {
     //if ready screen >> go to play state
     if (e.keyCode == 32) {
@@ -727,7 +727,7 @@ document.body.addEventListener('keydown', (e) => {
 // Op gsm 
 
 cvs.addEventListener('touchstart', () => {
-    e.preventDefault();
+    console.log("kakakakakakakakakakaakakak"); 
     //if ready screen >> go to play state
     if (gameState.current == gameState.getReady) {
         gameState.current = gameState.play
