@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+
 * {
     font-family: helvetica, sans-serif;
     -webkit-user-select: none;
     -moz-user-select: none;
 }
-body, canvas {
-  touch-action: manipulation; /* voorkomt dubbel-tap zoom */
+
+html, body, canvas {
+    touch-action: manipulation; /* voorkomt dubbel-tap zoom en pinch */
+    -ms-touch-action: manipulation; /* voor oude Edge/IE */
 }
 
 body {
@@ -18,7 +21,6 @@ body {
 * video game screen *
 ********************/
 .game-title h1 {
-/***** Flappy Bird *****/
     text-align: center;
     font-family: 'Carter One', cursive;
     color: rgb(251, 176, 37);
@@ -30,28 +32,31 @@ body {
     position: relative;
     top: 10px;
 }
+
 .game-screen {
-    /* background-color: rgb(69, 184, 194); */
     width: 300px;
     height: 500px;
     margin: 0 auto;
     position: relative;
     top: 50px;
 }
-    canvas {
-        background-color: 
-        black
-        /* #00bbc4 */
-        /* #d2ce89 */
-        ;
-        display: block;
-        width: 300px;
-        height: 500px;
-        margin: 0 auto;
-        border-radius: 10px;
-    }
-    .game-description {
-        color: #f0f0f0;
-        line-height: 2em;
-        text-align: center;
-    }
+
+canvas {
+    background-color: black;
+    display: block;
+    width: 300px;
+    height: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.game-description {
+    color: #f0f0f0;
+    line-height: 2em;
+    text-align: center;
+}
+
+/* Optioneel: overlay niet pointer-events, zodat taps erdoor komen */
+#description {
+    pointer-events: none;
+}

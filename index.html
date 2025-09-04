@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- viewport fixed + zoom uit -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Strandfuif winactie</title>
     <link rel="stylesheet" href="style.css">
@@ -12,10 +13,22 @@
             <h1>STRANDFUIF</h1>
         </div>
         <div class="game-screen">
-            <canvas id="game" width="300" height="500" ></canvas>
+            <canvas id="game" width="300" height="500"></canvas>
             <p id="description" class="game-description">Klik om te beginnen!</p>
         </div>
     </div>
     <script src="main.js"></script>
+
+    <!-- Extra JS om dubbele tap zoom te blokkeren -->
+    <script>
+        let lastTap = 0;
+        document.addEventListener("touchend", (e) => {
+            const now = Date.now();
+            if (now - lastTap < 300) {
+                e.preventDefault(); // blokkeer dubbel-tap zoom
+            }
+            lastTap = now;
+        }, { passive: false });
+    </script>
 </body>
 </html>
