@@ -700,7 +700,7 @@ setInterval(loop, 17)
 ***** EVENT HANDLERS ***** 
 *************************/
 //on mouse click // tap screen
-cvs.addEventListener('click', () => {
+cvs.addEventListener('mousedown', () => {
     //if ready screen >> go to play state
     if (gameState.current == gameState.getReady) {
         gameState.current = gameState.play
