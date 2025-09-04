@@ -700,8 +700,8 @@ setInterval(loop, 17)
 ***** EVENT HANDLERS ***** 
 *************************/
 
+ 
 
-//on spacebar
 document.body.addEventListener('keydown', (e) => {
     //if ready screen >> go to play state
     if (e.keyCode == 32) {
