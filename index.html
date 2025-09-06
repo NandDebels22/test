@@ -12,23 +12,18 @@
         <div class="game-title">
             <h1>STRANDFUIF</h1>
         </div>
+
         <div class="game-screen">
             <canvas id="game" width="300" height="500"></canvas>
-            <p id="description" class="game-description">Klik om te beginnen!</p>
+        </div>
+
+        <!-- Formulier onder canvas -->
+        <div class="game-controls">
+            <p id="description" class="game-description"> Tik om te beginnen.</p>
+            
         </div>
     </div>
-    <script src="main.js"></script>
 
-    <!-- Extra JS om dubbele tap zoom te blokkeren -->
-    <script>
-        let lastTap = 0;
-        document.addEventListener("touchend", (e) => {
-            const now = Date.now();
-            if (now - lastTap < 300) {
-                e.preventDefault(); // blokkeer dubbel-tap zoom
-            }
-            lastTap = now;
-        }, { passive: false });
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>

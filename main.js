@@ -299,7 +299,7 @@ map = [
 ]
 //current score, top score, tracker
 score = {
-    current: 0,
+    current: 0 ,
     best: null, // DO THIS STRETCH GOAL
     //values for drawing mapped numbers on canvas
     x: cvs.width/2,
@@ -310,39 +310,38 @@ score = {
         this.current = 0
     },
     //display the score
-    render: function() {
-        if (gameState.current == gameState.play ||
-            gameState.current == gameState.gameOver) {
-            //change current score number value to string value and access each place value
-            let string = this.current.toString()
-            let ones = string.charAt(string.length-1)
-            let tens = string.charAt(string.length-2)
-            let hundreds = string.charAt(string.length-3)
+    render: function () {
+    if (gameState.current == gameState.play ||
+        gameState.current == gameState.gameOver) {
 
-            //if current score has thousands place value: the game is over
-            if (this.current >= 1000) {
-                gameState.current = gameState.gameOver
-            
-            //if current score has ones, tens, and hundreds place value only
-            } else if (this.current >= 100) {
-                ctx.drawImage(theme2, map[ones].imgX,map[ones].imgY,map[ones].width,map[ones].height, ( (this.x-this.w/2) + (this.w) + 3 ),this.y,this.w,this.h)
+        let string = this.current.toString();
+        let totalWidth = string.length * (this.w + 3); // totale breedte score
+        let startX = this.x - totalWidth / 2;          // begin links
 
-                ctx.drawImage(theme2, map[tens].imgX,map[tens].imgY,map[tens].width,map[tens].height, ( (this.x-this.w/2) ),this.y,this.w,this.h)
+        for (let i = 0; i < string.length; i++) {
+            let digit = string.charAt(i);
+            let digitMap = map[digit];
 
-                ctx.drawImage(theme2, map[hundreds].imgX,map[hundreds].imgY,map[hundreds].width,map[hundreds].height, (   (this.x-this.w/2) - (this.w) - 3 ),this.y,this.w,this.h)
-
-            //if current score has ones and tens place value only
-            } else if (this.current >= 10) {
-                ctx.drawImage(theme2, map[ones].imgX,map[ones].imgY,map[ones].width,map[ones].height, ( (this.x-this.w/2) + (this.w/2) + 3 ),this.y,this.w,this.h)
-
-                ctx.drawImage(theme2, map[tens].imgX,map[tens].imgY,map[tens].width,map[tens].height, ( (this.x-this.w/2) - (this.w/2) - 3 ),this.y,this.w,this.h)
-            
-            //if current score has ones place value only
-            } else {
-                ctx.drawImage(theme2, map[ones].imgX,map[ones].imgY,map[ones].width,map[ones].height, ( this.x-this.w/2 ),this.y,this.w,this.h)
+            if (digitMap) {
+                ctx.drawImage(
+                    theme2,
+                    digitMap.imgX, digitMap.imgY,
+                    digitMap.width, digitMap.height,
+                    startX + i * (this.w + 3), // positie x per cijfer
+                    this.y,
+                    this.w,
+                    this.h
+                );
             }
         }
+
+        // Als je nog steeds een maximum wilt:
+        if (this.current >= 1000) {
+            gameState.current = gameState.gameOver;
+        }
     }
+}
+
 }    
 //bird : YELLOW BIRD
 bird = {
@@ -746,3 +745,30 @@ cvs.addEventListener('touchstart', () => {
         SFX_SWOOSH.play()
     }
 })
+
+function endGame() {
+    const name = document.getElementById('playerName').value.trim(); // verwijder spaties
+    const currentScore = score.current; // haal de score uit je score object
+
+    if (!name) {
+        alert('Vul eerst je Instagram-naam in!');
+        return;
+    }
+
+    fetch('http://localhost:3000/submit-score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, score: currentScore })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success){
+            alert(`Score van ${currentScore} opgeslagen!`);
+            score.reset(); // reset de score na verzenden
+            document.getElementById('playerName').value = ''; // input leegmaken
+        } else {
+            alert('Er is iets misgegaan.');
+        }
+    })
+    .catch(err => console.error(err));
+}
